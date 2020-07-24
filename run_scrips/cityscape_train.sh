@@ -1,0 +1,2 @@
+cat cityscape_train.sh
+python main.py --env retest --gpu-id 0 1 2 3 --workers 12 --lbl-agents 0 --num-steps 5 --max-episode-length 5 --reward seg --model AttUNet2 --out-radius 12 --use-masks --size  224 448 --log-period 10 --features 16 32 64 128 256 512  --entropy-alpha 0.05 --downsample -4 --data Cityscape --in-radius 0.8 --log-period 10 --lr 1e-4 --fgbg-ratio 0.2 --st-fgbg-ratio 0.3 --mer_w 1.0 --spl_w 1.5 --save-period 50 --minsize 12 

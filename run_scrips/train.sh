@@ -1,0 +1,2 @@
+cat train.sh
+python main.py --env multi_rads_1 --gpu-id 0 1 2 3 --workers 8 --lbl-agents 0 --num-steps 6 --max-episode-length 6 --reward seg --model ASPPAttUNet2 --out-radius 12 25 --use-masks --size 160 320 --log-period 10 --features 32 64 128 256 512 --entropy-alpha 0.05 --downsample 6 --data Cityscape --in-radius 0.7 --log-period 10 --lr 1e-4 --fgbg-ratio 0.2 --st-fgbg-ratio 0.5 --mer_w 1.0 --spl_w 1.5 --save-period 50 --minsize 15 --SEMI_DEBUG 
