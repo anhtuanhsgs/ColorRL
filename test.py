@@ -328,11 +328,14 @@ def test_func (args, shared_model, env_conf, datasets=None, tests=None, shared_d
 
     if args.wctrl == "s2m":
         schedule = args.wctrl_schedule
-        mer_w_delta = 0.15
+
+        delta = (shared_dict ['spl_w'] - shared_dict ['mer_w']) / (2 * len (schedule))
+
+        mer_w_delta = delta
         mer_w_var = shared_dict ['mer_w']
         mer_w_scheduler = Scheduler (mer_w_var, schedule, mer_w_delta)
 
-        split_delta = -0.15 / len (args.out_radius)
+        split_delta = -delta / len (args.out_radius)
         split_var = shared_dict ['spl_w'] / len (args.out_radius) 
         spl_w_scheduler = Scheduler (split_var, schedule, split_delta)
 
