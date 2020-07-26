@@ -419,8 +419,13 @@ parser.add_argument (
     nargs='+',
 )
 
-def setup_env_conf (args):
+parser.add_argument (
+    '--exp-pool',
+    default=0,
+    type=int,
+)
 
+def setup_env_conf (args):
     env_conf = {
         "data": args.data,
         "T": args.max_episode_length,
@@ -450,6 +455,8 @@ def setup_env_conf (args):
         "T0": args.T0,
         "rew_drop": args.rew_drop,
         "rew_drop_2": args.rew_drop_2,
+
+        "exp_pool": args.exp_pool,
     }
 
     if env_conf ["3D"]:
