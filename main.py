@@ -6,7 +6,6 @@ import torch
 import torch.multiprocessing as mp
 from environment import *
 from utils import get_cell_prob, get_data
-from models.models import *
 from train import train_func
 from test import test_func
 from natsort import natsorted

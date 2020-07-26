@@ -7,7 +7,6 @@ from .conv_gru import ConvGRUCell
 import numpy as np
 import time
 from .basic_modules import *
-from .modeling.deeplab import DeepLab
 from .att_unet import AttU_Net2, AttU_Net, AttU_Net3
 from .UNet import UNet3D, UNet2D
 from .aspp_att_unet import ASPPAttU_Net2, ASPPAttU_Net
