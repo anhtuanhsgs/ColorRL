@@ -564,9 +564,9 @@ def setup_data (args):
 
 
     if args.data == "dic-hela":
-        path_train = "Data/DIC_Hela/train/"
-        path_test = "Data/DIC_Hela/test/"
-        path_valid = "Data/DIC_Hela/test/"
+        path_train = "Data/DIC_HeLa/train/"
+        path_test = "Data/DIC_HeLa/test/"
+        path_valid = "Data/DIC_HeLa/test/"
         args.testlbl = True
         args.data_channel = 1
 
