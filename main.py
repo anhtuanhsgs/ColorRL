@@ -258,7 +258,7 @@ parser.add_argument (
 parser.add_argument (
     '--data',
     default='snemi',
-    choices=['syn', 'snemi', 'voronoi', 'zebrafish', 'cvppp', 'cvppp_eval', 'zebrafish3D', 
+    choices=['syn', 'snemi', 'voronoi', 'zebrafish', 'cvppp', 'cvppp_eval', 'zebrafish3D', 'dic-hela', 
             'sb2018', 'kitti', 'mnseg2018', "Cityscape", "256_cremi", "448_cremi", "cremi", "ctDNA"]
 )
 parser.add_argument (
@@ -528,6 +528,7 @@ def setup_data (args):
         path_test = "Data/ScienceBowl2018/test/"
         args.data_channel = 3
         args.testlbl = False
+
     if args.data == 'kitti':
         path_train = "Data/kitti/train2/"
         path_valid = "Data/kitti/train2/"
@@ -560,6 +561,15 @@ def setup_data (args):
         path_valid = "Data/Cremi/448/test/"
         args.testlbl = True
         args.data_channel = 1
+
+
+    if args.data == "dic-hela":
+        path_train = "Data/DIC_Hela/train/"
+        path_test = "Data/DIC_Hela/test/"
+        path_valid = "Data/DIC_Hela/test/"
+        args.testlbl = True
+        args.data_channel = 1
+
     if args.data == "ctDNA":
         path_train = "Data/ctDNA/train/"
         path_test = "Data/ctDNA/train/"
