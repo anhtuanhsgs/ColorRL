@@ -97,7 +97,7 @@ def budget_binary_erosion (img, fac, minsize=20):
 
 def resize_volume (vol, size, ds, is3D):
     if ds <= 0: 
-        print (vol[i].dtype, vol[i].shape)
+        print (vol[0].dtype, vol[0].shape)
         ret = [cv2.resize (vol[i], (size[1], size[0]), interpolation=cv2.INTER_NEAREST) for i in range (len (vol))]
     else:
         if (is3D):
