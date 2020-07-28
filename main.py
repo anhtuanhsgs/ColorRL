@@ -259,7 +259,7 @@ parser.add_argument (
     '--data',
     default='snemi',
     choices=['syn', 'snemi', 'voronoi', 'zebrafish', 'cvppp', 'cvppp_eval', 'zebrafish3D', 'dic-hela', 
-            'sb2018', 'kitti', 'mnseg2018', "Cityscape", "256_cremi", "448_cremi", "cremi", "ctDNA"]
+            'sb2018', 'kitti', 'mnseg2018', "256_cremi", "448_cremi", "cremi", "ctDNA"]
 )
 parser.add_argument (
     '--SEMI_DEBUG',
@@ -577,7 +577,7 @@ def setup_data (args):
         args.testlbl = True
         args.data_channel = 3
 
-    relabel = args.data not in ['cvppp', 'sb2018', 'kitti', 'mnseg2018', 'Cityscape', 'zebrafish', "cremi", "ctDNA", "256_cremi", "448_cremi", "zebrafish3D"]
+    relabel = args.data not in ['cvppp', 'sb2018', 'kitti', 'mnseg2018', 'zebrafish', "cremi", "ctDNA", "256_cremi", "448_cremi", "zebrafish3D", 'dic-hela']
     
     raw, gt_lbl = get_data (path=path_train, relabel=relabel)
     raw_valid, gt_lbl_valid = get_data (path=path_valid, relabel=relabel)
@@ -615,6 +615,8 @@ def setup_data (args):
             if args.DEBUG:
                 raw = [raw [i] [0:0+size[2], 0:0+size[0], 0:0+size[1]] for i in range (len (raw))]
                 gt_lbl = [gt_lbl [i] [0:0+size[2], 0:0+size[0], 0:0+size[1]] for i in range (len (raw))]
+                raw = [raw [0]]
+                gt_lbl = [gt_lbl [0]]
             else:
                 raw = [raw [i] for i in range (len (raw))]
                 gt_lbl = [gt_lbl [i] for i in range (len (raw))]

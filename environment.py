@@ -262,8 +262,8 @@ class General_env (gym.Env):
         self.w_map = None
 
         # Updating information for new data point
-        if (not self.config ["exp_pool"] > 0) or len (self.pool) < self.pool_capacity or self.pool_iter % self.pool_period == 0:
-            if self.config ["reward"] == "seg" and self.type == "train":
+        if self.config ["exp_pool"] <= 0 or len (self.pool) < self.pool_capacity or self.pool_iter % self.pool_period == 0:
+            if self.config ["reward"] == "seg" and (self.type == "train" or self.is3D):
                 if not self.is3D:
                     self.gt_lbl = relabel (reorder_label (self.gt_lbl))
 
@@ -304,7 +304,7 @@ class General_env (gym.Env):
 
                     # Calculate foreground ratio
                     fg_ratio = np.count_nonzero (self.keep_map) / np.prod (self.keep_map.shape)
-                    fg_ratio = min (fg_ratio, 0.1)
+                    # fg_ratio = min (fg_ratio, 0.1)
                     # Sampling the ratio so that the number of sampled background pixel will be calculated for reward
                     bg_sampling_map = self.rng.choice ([False,True], self.keep_map.shape, replace=True, p=[1.0-fg_ratio, fg_ratio])
                     self.keep_map = self.keep_map | (bg_sampling_map & (self.gt_lbl == 0))
@@ -340,8 +340,8 @@ class General_env (gym.Env):
                         seg = self.gt_lbl == idx
                         # Get the bdrs and boundaries
                         self.segs.append (seg)
-                        # for i, radius in enumerate (self.config ["out_radius"]):
-                        #     self.bdrs [i].append (seg ^ budget_binary_dilation (seg, radius, fac=self.config["dilate_fac"]))
+                        for i, radius in enumerate (self.config ["out_radius"]):
+                            self.bdrs [i].append (seg ^ budget_binary_dilation (seg, radius, fac=self.config["dilate_fac"]))
                         self.idx_list.append (idx)
 
                 if not self.is3D:
@@ -537,7 +537,7 @@ class EM_env (General_env):
         rows = 2
 
         # Sampling new data point when not using pool, pool is not full or it is pool update period
-        if (not self.config ["exp_pool"] > 0) or len (self.pool) < self.pool_capacity or self.pool_iter % self.pool_period == 0:
+        if self.config ["exp_pool"] <= 0 or len (self.pool) < self.pool_capacity or self.pool_iter % self.pool_period == 0:
             self.raw, self.gt_lbl = self.aug (self.raw, self.gt_lbl)
             self.raw, self.gt_lbl = self.random_crop (self.size, [self.raw, self.gt_lbl])
         else:
