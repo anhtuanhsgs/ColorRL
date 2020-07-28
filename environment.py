@@ -590,7 +590,7 @@ class EM_env (General_env):
                 self.raw = self.random_crop (self.size, [self.raw]) [0]
         else:
             self.raw = cv2.resize (self.raw, (self.size [1], self.size[0]), interpolation=cv2.INTER_NEAREST)
-            self.gt_lbl = cv2.resize (self.gt_lbl, (self.size [1], self.size [0]), interpolation=cv2.INTER_NEAREST)
+            self.gt_lbl = cv2.resize (self.gt_lbl.astype (np.int32), (self.size [1], self.size [0]), interpolation=cv2.INTER_NEAREST)
 
         self.split_ratio_sum = (np.zeros (self.size, dtype=np.float32) + 0.5) * (self.gt_lbl > 0)
         self.merge_ratio_sum = (np.zeros (self.size, dtype=np.float32) + 0.5) * (self.gt_lbl > 0)
