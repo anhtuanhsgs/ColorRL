@@ -122,7 +122,7 @@ class General_env (gym.Env):
                         A.Blur (p=0.3, blur_limit=4),
                         ]
                     )
-        if self.config ["DEBUG"] or self.config ["no_aug"] or self.is3D:
+        if self.config ["DEBUG"] or self.config ["no_aug"]:
             aug = A.Compose ([])
 
         ret = aug (image=image, mask=mask)        

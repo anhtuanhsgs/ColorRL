@@ -445,9 +445,8 @@ def test_func (args, shared_model, env_conf, datasets=None, tests=None, shared_d
                     probslist = [np.repeat (np.expand_dims (prob, -1),3, -1) for prob in player.probs]
                     probslist = np.concatenate (probslist, 1)
                     probslist = (probslist * 256).astype (np.uint8, copy=False)
-                    # log_img = renderlist [-1]
+                # log_img = renderlist [-1]
                     print (probslist.shape, log_img.shape)
-
                     log_img = np.concatenate ([probslist, log_img], 0)
 
                 log_info = {"valid_sample": log_img}
