@@ -475,7 +475,6 @@ def setup_env_conf (args):
         args.env += "_masks"
         env_conf ["observation_shape"][0] += env_conf ["T"]
 
-    args.env += "_" + args.reward
     args.env += "_" + args.data
 
     args.log_dir += args.data + "/" + args.env + "/"
