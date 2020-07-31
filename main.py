@@ -469,13 +469,13 @@ def setup_env_conf (args):
     args.env += "_" + args.model
     env_conf ["data_chan"] = args.data_channel 
     if args.use_lbl:
-        args.env += "_lbl"
+        # args.env += "_lbl"
         env_conf ["observation_shape"][0] += 1 #Raw, lbl, stop
     if args.use_masks:
-        args.env += "_masks"
+        # args.env += "_masks"
         env_conf ["observation_shape"][0] += env_conf ["T"]
 
-    args.env += "_" + args.data
+    # args.env += "_" + args.data
 
     args.log_dir += args.data + "/" + args.env + "/"
     args.save_model_dir += args.data + "/" + args.env + "/"
