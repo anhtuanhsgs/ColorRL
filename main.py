@@ -455,6 +455,7 @@ def setup_env_conf (args):
         "T0": args.T0,
         "rew_drop": args.rew_drop,
         "rew_drop_2": args.rew_drop_2,
+        
 
         "exp_pool": args.exp_pool,
     }

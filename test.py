@@ -199,7 +199,8 @@ def evaluate (args, env):
 
     diffFG = DiffFGLabels (pred_lbl, gt_lbl)
 
-    MWCov, MUCov, AvgFP, AvgFN  = kitti_metric(pred_lbl, gt_lbl)
+    # MWCov, MUCov, AvgFP, AvgFN  = kitti_metric(pred_lbl, gt_lbl)
+    MWCov, MUCov, AvgFP, AvgFN  = 0, 0, 0, 0
 
     rand_i = adjusted_rand_index(gt_lbl,pred_lbl)
 
@@ -386,7 +387,7 @@ def test_func (args, shared_model, env_conf, datasets=None, tests=None, shared_d
                 if tests is not None and not args.DEBUG:
                     inference (args, logger, player.model, tests [0], test_env, gpu_id, player.env.rng, num_tests)
 
-                if (np.max (env.lbl) != 0 and np.max (env.gt_lbl) != 0) and not "3D" in args.data:
+                if (np.max (env.lbl) != 0 and np.max (env.gt_lbl) != 0):
                     bestDice, FgBgDice, diffFG, MWCov, MUCov, AvgFP, AvgFN, rand_i = evaluate (args, player.env)
 
                     recent_FgBgDice.push (FgBgDice)
