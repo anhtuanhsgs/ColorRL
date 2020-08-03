@@ -84,6 +84,16 @@ def rotate(image, n):
     image = rotated
     return image
 
+def rotate3D (image, n):
+    rot_k1 = n // 16
+    rot_k2 = (n % 16) // 4
+    rot_k3 = (n % 4)
+    rotated = np.rot90(image, rot_k1, axes=(0,1))
+    rotated = np.rot90(image, rot_k2, axes=(1,2))
+    rotated = np.rot90(image, rot_k3, axes=(0,2))
+    return rotated
+
+
 def reverse(image, n):
     assert ((image.ndim == 2) | (image.ndim == 3))
     assert (n < 2)
@@ -136,9 +146,9 @@ def RotFlipRev3D (volumes, rng):
     volumes = [np.copy (vol) for vol in volumes]
     nFlip = rng.randint (4)
     nRev = rng.randint (2)
-    nRot = rng.randint (4)
+    nRot = rng.randint (4 * 4 * 4)
     ret = [flip (vol, nFlip) for vol in volumes]
-    ret = [rotate (vol, nRot) for vol in ret]
+    ret = [rotate3D (vol, nRot) for vol in ret]
     ret = [reverse (vol, nRev) for vol in ret]
     return ret
     

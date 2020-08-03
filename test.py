@@ -296,7 +296,7 @@ def test_func (args, shared_model, env_conf, datasets=None, tests=None, shared_d
 
     recent_episode_scores = ScalaTracker (100)
     recent_FgBgDice = ScalaTracker (100)
-    recent_bestDice = ScalaTracker (100)
+    recent_bestDice = ScalaTracker (50)
     recent_diffFG = ScalaTracker (100)
 
     recent_MUCov = ScalaTracker (100)
@@ -304,7 +304,7 @@ def test_func (args, shared_model, env_conf, datasets=None, tests=None, shared_d
     recent_AvgFP = ScalaTracker (100)
     recent_AvgFN = ScalaTracker (100)
 
-    recent_rand_i = ScalaTracker (100)
+    recent_rand_i = ScalaTracker (50)
 
     renderlist = []
     renderlist.append (player.env.render ())

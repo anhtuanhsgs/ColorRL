@@ -16,10 +16,12 @@ class UNet3D (nn.Module):
         self.Maxpool = nn.MaxPool3d (kernel_size=(2,2,2), stride=(2,2,2))
 
         if is3D:
-            self.fuse_in = nn.Sequential (
-                nn.Conv3d (in_channels=in_ch, out_channels=features[0], kernel_size=3, padding=1),
-                nn.ReLU (),
-                )
+            # self.fuse_in = nn.Sequential (
+            #     nn.Conv3d (in_channels=in_ch, out_channels=features[0], kernel_size=3, padding=1),
+            #     nn.ReLU (),
+            #     )
+
+            self.fuse_in = FuseIn3D (in_ch, features[0], split=split)
         else:
             self.fuse_in = FuseIn2(in_ch, features[0] // 2, split=split, is3D=is3D)
 

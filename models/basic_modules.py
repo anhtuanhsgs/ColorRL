@@ -229,23 +229,23 @@ class FuseIn (nn.Module):
 
 class FuseIn3D (nn.Module):
     def __init__ (self, in_ch, out_ch, split=1):
-        super (FuseIn, self).__init__ ()
+        super (FuseIn3D, self).__init__ ()
         self.split = split
-        self.raw_path = ConvInELU (split, out_ch // 2, kernel_size=(3,3,3), is3D=True)
-        self.raw_path = ConvInELU (out_ch // 2, out_ch // 2, kernel_size=(3,3,3), is3D=True)
-        self.lbl_path = ConvInELU (in_ch-split, out_ch // 2, kernel_size=(3,3,3), is3D=True)
-        self.lbl_path = ConvInELU (out_ch // 2, out_ch // 2, kernel_size=(3,3,3), is3D=True)
+        self.raw_path0 = ConvInELU (split, out_ch // 2, kernel_size=(3,3,3), is3D=True)
+        self.raw_path1 = ConvInELU (out_ch // 2, out_ch // 2, kernel_size=(3,3,3), is3D=True)
+        self.lbl_path0 = ConvInELU (in_ch-split, out_ch // 2, kernel_size=(3,3,3), is3D=True)
+        self.lbl_path1 = ConvInELU (out_ch // 2, out_ch // 2, kernel_size=(3,3,3), is3D=True)
 
     def forward (self, x):
         x_raw = x [:, :self.split, :, :]
         x_lbl = x [:, self.split:, :, :]
         
-        x_raw = self.local0 (x_raw)
-        x_raw = self.local1 (x_raw)
+        x_raw = self.raw_path0 (x_raw)
+        x_raw = self.raw_path1 (x_raw)
         
-        x_lbl = self.global0 (x_lbl)
-        x_lbl = self.global1 (x_lbl)
-        x_lbl = self.global2 (x_lbl)
+        x_lbl = self.lbl_path0 (x_lbl)
+        x_lbl = self.lbl_path1 (x_lbl)
+
         return torch.cat ([x_raw, x_lbl], dim=1)
 
 

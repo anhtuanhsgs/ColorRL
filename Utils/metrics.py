@@ -67,12 +67,14 @@ def DiffFGLabels(inLabel,gtLabel):
 
     inLabels = np.unique(inLabel)
     gtLabels = np.unique(gtLabel)
-    maxInLabel = np.int(np.max(inLabels)) # maximum label value in inLabel
-    minInLabel = np.int(np.min(inLabels)) # minimum label value in inLabel
-    maxGtLabel = np.int(np.max(gtLabels)) # maximum label value in gtLabel
-    minGtLabel = np.int(np.min(gtLabels)) # minimum label value in gtLabel
+    # maxInLabel = np.int(np.max(inLabels)) # maximum label value in inLabel
+    # minInLabel = np.int(np.min(inLabels)) # minimum label value in inLabel
+    # maxGtLabel = np.int(np.max(gtLabels)) # maximum label value in gtLabel
+    # minGtLabel = np.int(np.min(gtLabels)) # minimum label value in gtLabel
 
-    return  (maxInLabel-minInLabel) - (maxGtLabel-minGtLabel)
+    # return  (maxInLabel-minInLabel) - (maxGtLabel-minGtLabel)
+    return (abs (len (gtLabels) - len (inLabel)))
+    
 
 def getIOU(inLabel,gtLabel):
     intersect_cnt = np.count_nonzero (inLabel & gtLabel)

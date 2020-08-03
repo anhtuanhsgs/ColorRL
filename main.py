@@ -464,7 +464,7 @@ def setup_env_conf (args):
         env_conf ["size"] = [args.size[2], args.size[0], args.size[1]]
 
     env_conf ["observation_shape"] = [args.data_channel + 1] + env_conf ["size"]
-
+    
 
 
     args.env += "_" + args.model

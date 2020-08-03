@@ -293,6 +293,8 @@ class ScalaTracker ():
             self.arr.pop (0)
 
     def mean (self):
+        if len (self.arr) == 0:
+            return 0
         return np.mean (self.arr)
 
 if __name__ == "__main__":
