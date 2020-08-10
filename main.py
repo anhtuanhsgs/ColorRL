@@ -581,11 +581,16 @@ def setup_data (args):
     
     raw, gt_lbl = get_data (path=path_train, relabel=relabel)
     raw_valid, gt_lbl_valid = get_data (path=path_valid, relabel=relabel)
+
     
     raw_test = None
     gt_lbl_test = None
     if path_test is not None:
         raw_test, gt_lbl_test = get_data (path=path_test, relabel=relabel)
+
+    print ("train: ", len (raw), raw [0].shape)
+    print ("valid: ", len (raw_valid), raw_valid [0].shape)
+    print ("test: ", len (raw_test), raw_test [0].shape)
 
 
     raw_test_upsize = None
