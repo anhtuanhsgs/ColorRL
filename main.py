@@ -550,15 +550,15 @@ def setup_data (args):
         args.testlbl = True
         args.data_channel = 3
     if args.data == "256_cremi":
-        path_train = "Data/Cremi/256/train/"
-        path_test = "Data/Cremi/256/train/"
-        path_valid = "Data/Cremi/256/test/"
+        path_train = "Data/Cremi/Corrected/256/train/"
+        path_test = "Data/Cremi/Corrected/256/test/"
+        path_valid = "Data/Cremi/Corrected/256/valid/"
         args.testlbl = True
         args.data_channel = 1
     if args.data == "448_cremi":
-        path_train = "Data/Cremi/448/train/"
-        path_test = "Data/Cremi/448/train/"
-        path_valid = "Data/Cremi/448/test/"
+        path_train = "Data/Cremi/Corrected/448/train/"
+        path_test = "Data/Cremi/Corrected/448/test/"
+        path_valid = "Data/Cremi/Corrected/448/valid/"
         args.testlbl = True
         args.data_channel = 1
 
