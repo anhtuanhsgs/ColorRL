@@ -220,12 +220,12 @@ def get_data (path, relabel):
     if (len (X_train) > 0):
         if len (X_train) == 1:
             X_train = X_train [0]
-        else:
+        elif X_train [0].ndim > 2:
             X_train =  vols2list (X_train)
     if (len (y_train) > 0):
         if len (y_train) == 1:
                 y_train = y_train [0]
-        else:
+        elif y_train p[0].ndim > 2:
             y_train = vols2list (y_train)
         if (relabel):
             
