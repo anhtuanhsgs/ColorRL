@@ -259,7 +259,7 @@ parser.add_argument (
     '--data',
     default='snemi',
     choices=['syn', 'snemi', 'voronoi', 'zebrafish', 'cvppp', 'cvppp_eval', 'zebrafish3D', 'dic-hela', 
-            'sb2018', 'kitti', 'mnseg2018', "256_cremi", "448_cremi", "cremi", "ctDNA"]
+            'sb2018', 'kitti', 'mnseg2018', "256_cremi", "448_cremi", "cremi", "ctDNA", "cremi3D"]
 )
 parser.add_argument (
     '--SEMI_DEBUG',
