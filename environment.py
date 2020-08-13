@@ -57,7 +57,12 @@ class General_env (gym.Env):
     def aug (self, image, mask):
 
         if self.is3D:
-            [image, mask] = RotFlipRev3D ([image, mask], self.rng)
+            if not (self.size[1] == self.size[2] == self.size[0]):
+                [image, mask] = FlipRev3D ([image, mask], self.rng)
+                rotn = self.rng.randint (4)
+                [image, mask] = [rotate3D (img, rotn) for img in [image, mask]]
+            else:
+                [image, mask] = RotFlipRev3D ([image, mask], self.rng)
             ret = {"image": image, "mask": mask}
             return ret ['image'], ret ['mask']
         

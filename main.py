@@ -582,12 +582,11 @@ def setup_data (args):
         args.testlbl = True
         args.data_channel = 3
 
-    relabel = args.data not in ['cvppp', 'sb2018', 'kitti', 'mnseg2018', 'zebrafish', "cremi", "ctDNA", "256_cremi", "448_cremi", "zebrafish3D", 'dic-hela']
+    relabel = args.data not in ['cvppp', 'sb2018', 'kitti', 'mnseg2018', 'zebrafish', "cremi", "ctDNA", "256_cremi", "448_cremi", "zebrafish3D", 'dic-hela', 'cremi3D']
     
     raw, gt_lbl = get_data (path=path_train, relabel=relabel)
     raw_valid, gt_lbl_valid = get_data (path=path_valid, relabel=relabel)
 
-    
     raw_test = None
     gt_lbl_test = None
     if path_test is not None:

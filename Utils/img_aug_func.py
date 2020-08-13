@@ -89,8 +89,8 @@ def rotate3D (image, n):
     rot_k2 = (n % 16) // 4
     rot_k3 = (n % 4)
     rotated = np.rot90(image, rot_k1, axes=(0,1))
-    rotated = np.rot90(image, rot_k2, axes=(1,2))
-    rotated = np.rot90(image, rot_k3, axes=(0,2))
+    rotated = np.rot90(image, rot_k2, axes=(0,2))
+    rotated = np.rot90(image, rot_k3, axes=(1,2))
     return rotated
 
 
@@ -149,6 +149,15 @@ def RotFlipRev3D (volumes, rng):
     nRot = rng.randint (4 * 4 * 4)
     ret = [flip (vol, nFlip) for vol in volumes]
     ret = [rotate3D (vol, nRot) for vol in ret]
+    ret = [reverse (vol, nRev) for vol in ret]
+    return ret
+
+
+def FlipRev3D (volumes, rng):
+    volumes = [np.copy (vol) for vol in volumes]
+    nFlip = rng.randint (4)
+    nRev = rng.randint (2)
+    ret = [flip (vol, nFlip) for vol in volumes]
     ret = [reverse (vol, nRev) for vol in ret]
     return ret
     
