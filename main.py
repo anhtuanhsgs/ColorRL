@@ -561,7 +561,12 @@ def setup_data (args):
         path_valid = "Data/Cremi/Corrected/448/valid/"
         args.testlbl = True
         args.data_channel = 1
-
+    if args.data == "cremi3D":
+        path_train = "Data/Cremi/3D/train/"
+        path_test = "Data/Cremi/3D/test/"
+        path_valid = "Data/Cremi/3D/valid/"
+        args.testlbl = True
+        args.data_channel = 1
 
     if args.data == "dic-hela":
         path_train = "Data/DIC_HeLa/train/"
