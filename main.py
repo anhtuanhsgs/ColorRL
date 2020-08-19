@@ -626,7 +626,6 @@ def setup_data (args):
         args.downsample = int (args.downsample)         
 
     if (args.DEBUG):
-        if not args.down
         size = [args.size [i] * args.downsample for i in range (len (args.size))]
         if args.downsample == -1:
             size = raw[0].shape[0]
