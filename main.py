@@ -259,7 +259,7 @@ parser.add_argument (
     '--data',
     default='snemi',
     choices=['syn', 'snemi', 'voronoi', 'zebrafish', 'cvppp', 'cvppp_eval', 'zebrafish3D', 'dic-hela', 
-            'sb2018', 'kitti', 'mnseg2018', "256_cremi", "448_cremi", "cremi", "ctDNA", "cremi3D"]
+            'sb2018', 'kitti', 'mnseg2018', "256_cremi", "448_cremi", "cremi", "ctDNA", "cremi3D", "160_cremi"]
 )
 parser.add_argument (
     '--SEMI_DEBUG',
@@ -561,6 +561,12 @@ def setup_data (args):
         path_valid = "Data/Cremi/Corrected/448/valid/"
         args.testlbl = True
         args.data_channel = 1
+    if args.data == "160_cremi":
+        path_train = "Data/Cremi/Corrected/160/train/"
+        path_test = "Data/Cremi/Corrected/160/test/"
+        path_valid = "Data/Cremi/Corrected/160/valid/"
+        args.testlbl = True
+        args.data_channel = 1
     if args.data == "cremi3D":
         path_train = "Data/Cremi/3D/train/"
         path_test = "Data/Cremi/3D/test/"
@@ -582,7 +588,8 @@ def setup_data (args):
         args.testlbl = True
         args.data_channel = 3
 
-    relabel = args.data not in ['cvppp', 'sb2018', 'kitti', 'mnseg2018', 'zebrafish', "cremi", "ctDNA", "256_cremi", "448_cremi", "zebrafish3D", 'dic-hela', 'cremi3D']
+    relabel = args.data not in ['cvppp', 'sb2018', 'kitti', 'mnseg2018', 'zebrafish', "cremi", "ctDNA", "256_cremi", "448_cremi", 
+                                    "zebrafish3D", 'dic-hela', 'cremi3D', '160_cremi']
     
     raw, gt_lbl = get_data (path=path_train, relabel=relabel)
     raw_valid, gt_lbl_valid = get_data (path=path_valid, relabel=relabel)
