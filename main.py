@@ -623,7 +623,8 @@ def setup_data (args):
             gt_lbl_test_upsize = np.concatenate([gt_lbl_valid, gt_lbl_test], axis=0)
 
 
-    if abs (int (args.downsample) - args.downsample) < 1e-4:
+    if abs (int (args.downsample) - args.downsample) > 1e-4:
+        size = None
         raw = resize_volume (raw, size, ds, "3D" in args.data)
         gt_lbl = resize_volume (gt_lbl, size, ds, "3D" in args.data)
         raw_valid = resize_volume (raw_valid, size, ds, "3D" in args.data)
