@@ -245,7 +245,7 @@ parser.add_argument (
 
 parser.add_argument (
     '--downsample',
-    type=int,
+    type=float,
     default=1,
     help='Data down-sampling rate, -1 to have all images down-sampled to input processing size of agent',
 )
@@ -304,7 +304,7 @@ parser.add_argument (
 parser.add_argument (
     '--minsize',
     type=int,
-    default=20,
+    default=0,
 )
 
 
@@ -506,8 +506,8 @@ def setup_data (args):
         args.testlbl = True
     if args.data == "zebrafish3D":
         path_train = "Data/Zebrafish3D/train/"
-        path_valid = "Data/Zebrafish3D/train/"
-        path_test = "Data/Zebrafish3D/train/"
+        path_valid = "Data/Zebrafish3D/valid/"
+        path_test = "Data/Zebrafish3D/test/"
         args.data_channel = 1
         args.testlbl = True
     if args.data == "cvppp":
@@ -616,7 +616,17 @@ def setup_data (args):
             gt_lbl_test_upsize = np.concatenate([gt_lbl_valid, gt_lbl_test], axis=0)
 
 
+    if abs (int (args.downsample) - args.downsample) < 1e-4:
+        raw = resize_volume (raw, size, ds, "3D" in args.data)
+        gt_lbl = resize_volume (gt_lbl, size, ds, "3D" in args.data)
+        raw_valid = resize_volume (raw_valid, size, ds, "3D" in args.data)
+        gt_lbl_valid = resize_volume (gt_lbl_valid, size, ds, "3D" in args.data)
+        args.downsample = 1
+    else:
+        args.downsample = int (args.downsample)         
+
     if (args.DEBUG):
+        if not args.down
         size = [args.size [i] * args.downsample for i in range (len (args.size))]
         if args.downsample == -1:
             size = raw[0].shape[0]

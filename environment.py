@@ -275,7 +275,7 @@ class General_env (gym.Env):
                 # Get all unique id from ground truth
                 unique_list = np.unique (self.gt_lbl, return_counts=True)
                 # Remove small segment
-                self.idx_list = [unique_list [0][i] for i in range (len (unique_list [0])) if unique_list [1][i] > 100]
+                self.idx_list = [unique_list [0][i] for i in range (len (unique_list [0])) if unique_list [1][i] > self.config["minsize"]]
 
                 # Remove background
                 if 0 in self.idx_list:
