@@ -567,10 +567,18 @@ def setup_data (args):
         path_valid = "Data/Cremi/Corrected/160/valid/"
         args.testlbl = True
         args.data_channel = 1
-    if args.data == "cremi3D":
-        path_train = "Data/Cremi/3D/train/"
-        path_test = "Data/Cremi/3D/test/"
-        path_valid = "Data/Cremi/3D/valid/"
+
+    if args.data == "cremi3D_64":
+        path_train = "Data/Cremi/3D_64/train/"
+        path_test = "Data/Cremi/3D_64/test/"
+        path_valid = "Data/Cremi/3D_64/valid/"
+        args.testlbl = True
+        args.data_channel = 1
+
+    if args.data == "cremi3D_96":
+        path_train = "Data/Cremi/3D_96/train/"
+        path_test = "Data/Cremi/3D_96/test/"
+        path_valid = "Data/Cremi/3D_96/valid/"
         args.testlbl = True
         args.data_channel = 1
 
@@ -589,7 +597,7 @@ def setup_data (args):
         args.data_channel = 3
 
     relabel = args.data not in ['cvppp', 'sb2018', 'kitti', 'mnseg2018', 'zebrafish', "cremi", "ctDNA", "256_cremi", "448_cremi", 
-                                    "zebrafish3D", 'dic-hela', 'cremi3D', '160_cremi']
+                                    "zebrafish3D", 'dic-hela', '96_cremi3D', '64_cremi3D', '160_cremi']
     
     raw, gt_lbl = get_data (path=path_train, relabel=relabel)
     raw_valid, gt_lbl_valid = get_data (path=path_valid, relabel=relabel)
