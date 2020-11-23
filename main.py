@@ -15,6 +15,7 @@ from Utils.utils import *
 from skimage.measure import label
 from shared_optim import SharedRMSprop, SharedAdam
 from models.models import *
+from deploy import deploy
 
 parser = argparse.ArgumentParser(description='A3C')
 parser.add_argument(
@@ -259,8 +260,9 @@ parser.add_argument (
     '--data',
     default='snemi',
     choices=['syn', 'snemi', 'voronoi', 'zebrafish', 'cvppp', 'cvppp_eval', 'zebrafish3D', 'dic-hela', 
-            'sb2018', 'kitti', 'mnseg2018', "256_cremi", "448_cremi", "cremi", "ctDNA", "cremi3D", "160_cremi"]
+            'sb2018', 'kitti', '160_mnseg2018', '224_mnseg2018', "256_cremi", "448_cremi", '96_cremi3D', '64_cremi3D', "ctDNA", "cremi3D", "160_cremi"]
 )
+
 parser.add_argument (
     '--SEMI_DEBUG',
     action="store_true"
@@ -507,7 +509,7 @@ def setup_data (args):
     if args.data == "zebrafish3D":
         path_train = "Data/Zebrafish3D/train/"
         path_valid = "Data/Zebrafish3D/valid/"
-        path_test = "Data/Zebrafish3D/test/"
+        path_test = "Data/Zebrafish3D/3D_96/test/"
         args.data_channel = 1
         args.testlbl = True
     if args.data == "cvppp":
@@ -536,10 +538,17 @@ def setup_data (args):
         args.data_channel = 3
         args.testlbl = True
 
-    if args.data == 'mnseg2018':
-        path_train = "Data/MoNuSeg2018/train/"
-        path_valid = "Data/MoNuSeg2018/test/"
-        path_test = "Data/MoNuSeg2018/test/"
+    if args.data == '160_mnseg2018':
+        path_train = "Data/MoNuSeg2018/160/train/"
+        path_valid = "Data/MoNuSeg2018/160/valid/"
+        path_test = "Data/MoNuSeg2018/160/test/"
+        args.data_channel = 3
+        args.testlbl = True
+
+    if args.data == '224_mnseg2018':
+        path_train = "Data/MoNuSeg2018/224/train/"
+        path_valid = "Data/MoNuSeg2018/224/valid/"
+        path_test = "Data/MoNuSeg2018/224/test/"
         args.data_channel = 3
         args.testlbl = True
 
@@ -568,14 +577,14 @@ def setup_data (args):
         args.testlbl = True
         args.data_channel = 1
 
-    if args.data == "cremi3D_64":
+    if args.data == "64_cremi3D":
         path_train = "Data/Cremi/3D_64/train/"
         path_test = "Data/Cremi/3D_64/test/"
         path_valid = "Data/Cremi/3D_64/valid/"
         args.testlbl = True
         args.data_channel = 1
 
-    if args.data == "cremi3D_96":
+    if args.data == "96_cremi3D":
         path_train = "Data/Cremi/3D_96/train/"
         path_test = "Data/Cremi/3D_96/test/"
         path_valid = "Data/Cremi/3D_96/valid/"
@@ -597,15 +606,15 @@ def setup_data (args):
         args.data_channel = 3
 
     relabel = args.data not in ['cvppp', 'sb2018', 'kitti', 'mnseg2018', 'zebrafish', "cremi", "ctDNA", "256_cremi", "448_cremi", 
-                                    "zebrafish3D", 'dic-hela', '96_cremi3D', '64_cremi3D', '160_cremi']
+                                    "zebrafish3D", 'dic-hela', '96_cremi3D', '64_cremi3D', '160_cremi', '224_mnseg2018', '160_mnseg2018']
     
-    raw, gt_lbl = get_data (path=path_train, relabel=relabel)
-    raw_valid, gt_lbl_valid = get_data (path=path_valid, relabel=relabel)
+    raw, gt_lbl = get_data (path=path_train, relabel=relabel, data_channel=args.data_channel)
+    raw_valid, gt_lbl_valid = get_data (path=path_valid, relabel=relabel, data_channel=args.data_channel)
 
     raw_test = None
     gt_lbl_test = None
     if path_test is not None:
-        raw_test, gt_lbl_test = get_data (path=path_test, relabel=relabel)
+        raw_test, gt_lbl_test = get_data (path=path_test, relabel=relabel, data_channel=args.data_channel)
 
     print ("train: ", len (raw), raw [0].shape)
     print ("valid: ", len (raw_valid), raw_valid [0].shape)
@@ -614,22 +623,6 @@ def setup_data (args):
 
     raw_test_upsize = None
     gt_lbl_test_upsize = None
-    if (args.deploy) and (path_test is not None):
-        if args.eval_data == "test":
-            raw_test_upsize = raw_test
-            gt_lbl_test_upsize = gt_lbl_test
-        elif args.eval_data == "valid":
-            raw_test_upsize = raw_valid
-            gt_lbl_test_upsize = gt_lbl_valid
-        elif args.eval_data == "train":
-            raw_test_upsize = raw
-            gt_lbl_test_upsize = gt_lbl
-        elif args.eval_data == "all":
-            # raw_test_upsize = np.concatenate([raw, raw_valid, raw_test], axis=0)
-            # gt_lbl_test_upsize = np.concatenate([gt_lbl, gt_lbl_valid, gt_lbl_test], axis=0)
-            raw_test_upsize = np.concatenate([raw_valid, raw_test], axis=0)
-            gt_lbl_test_upsize = np.concatenate([gt_lbl_valid, gt_lbl_test], axis=0)
-
 
     if abs (int (args.downsample) - args.downsample) > 1e-4:
         size = None
@@ -678,10 +671,7 @@ def setup_data (args):
         if args.testlbl:
             gt_lbl_test = resize_volume (gt_lbl_test, size, ds, "3D" in args.data)
 
-    if (args.deploy):
-        return raw, gt_lbl, raw_valid, gt_lbl_valid, raw_test, gt_lbl_test, raw_test_upsize, gt_lbl_test_upsize
-    else:
-        return raw, gt_lbl, raw_valid, gt_lbl_valid, raw_test, gt_lbl_test
+    return raw, gt_lbl, raw_valid, gt_lbl_valid, raw_test, gt_lbl_test
 
 def main (scripts, args):
     scripts = " ".join (sys.argv[0:])
@@ -696,7 +686,7 @@ def main (scripts, args):
         mp.set_start_method('spawn')
 
     if (args.deploy):
-        raw, gt_lbl, raw_valid, gt_lbl_valid, raw_test, gt_lbl_test, raw_test_upsize, gt_lbl_test_upsize = setup_data(args)
+        raw, gt_lbl, raw_valid, gt_lbl_valid, raw_test, gt_lbl_test = setup_data(args)
     else:
         raw, gt_lbl, raw_valid, gt_lbl_valid, raw_test, gt_lbl_test = setup_data (args)
 
@@ -718,17 +708,23 @@ def main (scripts, args):
             args.load,
             map_location=lambda storage, loc: storage)
         shared_model.load_state_dict(saved_state)
-    shared_model.share_memory()
+    if not args.deploy:
+        shared_model.share_memory()
+
+    if args.deploy:
+         deploy (shared_model, args, args.gpu_ids [0], (raw_test, gt_lbl_test))
+         exit ()
     
-    if args.shared_optimizer:
-        if args.optimizer == 'RMSprop':
-            optimizer = SharedRMSprop(shared_model.parameters(), lr=args.lr)
-        if args.optimizer == 'Adam':
-            optimizer = SharedAdam(
-                shared_model.parameters(), lr=args.lr, amsgrad=args.amsgrad)
-        optimizer.share_memory()
-    else:
-        optimizer = None
+    # if args.shared_optimizer:
+    #     if args.optimizer == 'RMSprop':
+    #         optimizer = SharedRMSprop(shared_model.parameters(), lr=args.lr)
+    #     if args.optimizer == 'Adam':
+    #         optimizer = SharedAdam(
+    #             shared_model.parameters(), lr=args.lr, amsgrad=args.amsgrad)
+    #     optimizer.share_memory()
+    # else:
+    #     optimizer = None
+
 
     processes = []
     if not args.no_test:

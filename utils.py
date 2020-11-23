@@ -203,7 +203,7 @@ def vols2list (vols):
             ret += [img]
     return ret
 
-def get_data (path, relabel):
+def get_data (path, relabel, data_channel=1):
     train_path = natsorted (glob.glob(path + 'A/*.tif'))
     train_label_path = natsorted (glob.glob(path + 'B/*.tif'))
     train_path += natsorted (glob.glob (path + "A/*.npy"))
@@ -213,9 +213,8 @@ def get_data (path, relabel):
     X_train = read_im (train_path)
     y_train = read_im (train_label_path)
 
-    if "3D" in path:
+    if "3D" in path or data_channel==3:
         return X_train, y_train
-
     
     if (len (X_train) > 0):
         if len (X_train) == 1:
