@@ -1,5 +1,5 @@
 cat $0
-python -W ignore main.py --env test \
+python -W ignore main.py --env 256_cremi_train \
 --gpu-id  0 1 2 3 --workers 8 --lbl-agents 0 --valid-gpu 0 \
 --num-steps 6 --max-episode-length 6 --max-temp-steps 99 \
 --reward seg --model AttUNet2 --out-radius 12 18 --use-masks \
