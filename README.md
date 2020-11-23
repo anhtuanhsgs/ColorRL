@@ -20,6 +20,8 @@ Testing data path is setup as:
 ```
 path_to_test_set/A/*.tif
 ```
+To update data path, please modify ```main.py```
+
 ## Example with CREMI
 We include our Cre-256 dataset in '''Data/Cremi/Corrected'''
 For parameters' usage, please see '''main.py'''
@@ -64,10 +66,12 @@ checkpoints are saved at ```trained_models```
 
 ### Inference
 For test set inference with CVPPP (similarly with other data), edit ```run_scrips/cvppp_deploy.sh```:
+
 ```--load```: load a check point (eg. ```trained_models/cvppp/cvppp/```)
+
 ```--deploy```: to run as an inference task
 then runs:
 ```
-bash run_scripscvppp_deploy.sh
+bash run_scrips/cvppp_deploy.sh
 ```
 Results are stored at ```deploy/```
