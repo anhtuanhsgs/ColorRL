@@ -17,7 +17,7 @@ python -W ignore main.py --env test \
 --dilate-fac 2 \
 --rew-drop 8 --rew-drop-2 8 \
 --deploy \
---load trained_model/256_cremi/256_cremi_train/5.dat \
+--load trained_models/256_cremi/256_cremi_train/5.dat \
 
 #--load trained_models/cremi/256_s1.5_m0.5_AttUNet2_masks_seg_cremi/256_s1.5_m0.5_AttUNet2_masks_seg_cremi_5350.dat 
 
