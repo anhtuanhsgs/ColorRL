@@ -96,6 +96,8 @@ def budget_binary_erosion (img, fac, minsize=20):
     return inr [1:-1,1:-1]    
 
 def resize_volume (vol, size, ds, is3D):
+    if not is3D and len (vol) == 1: # Urgly fix for CVPPP ([volume] * 1, [NxHxWx3])
+        vol = vol [0]
     if abs (int (ds) - ds) > 1e-4:
         ret = []
         for img in vol:
