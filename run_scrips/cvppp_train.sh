@@ -9,7 +9,7 @@ python main.py --env cvppp_train \
 --spl_w 3.0 --mer_w 1.0 \
 --split ins \
 --save-period 50 --minsize 12 \
---log-dir logs/July2020/ --save-model-dir trained_models \
+--log-dir logs/July2020/ --save-model-dir trained_models/ \
 --dilate-fac 2 \
 --rew-drop 20 --rew-drop-2 1 \
 
