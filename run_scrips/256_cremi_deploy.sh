@@ -11,7 +11,9 @@ python -W ignore main.py --env 256_s1.5_m1.0s_final_2 --gpu-id  0 1 2 3 4 5 6 7 
 --log-dir logs/Fer2019/FINAL/ \
 --dilate-fac 2 \
 --deploy \
---load trained_models/cremi/256_s1.5_m0.5_AttUNet2_masks_seg_cremi/256_s1.5_m0.5_AttUNet2_masks_seg_cremi_5350.dat 
+--load trained_model/256_cremi/256_cremi_train/5.dat \
+
+#--load trained_models/cremi/256_s1.5_m0.5_AttUNet2_masks_seg_cremi/256_s1.5_m0.5_AttUNet2_masks_seg_cremi_5350.dat 
 
 #--load trained_models/256_cremi/256_s0.8_m1.2_cnt3_AttUNet2_masks_seg_256_cremi/256_s0.8_m1.2_cnt3_AttUNet2_masks_seg_256_cremi_5200.dat  
 

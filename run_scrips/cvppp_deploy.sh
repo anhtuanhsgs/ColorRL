@@ -10,4 +10,4 @@ python main.py --env test --gpu-id 0  --workers 0 \
 --dilate-fac 2 \
 --log-dir logs/ \
 --deploy \
---load trained_models/cvppp/test_AttUNet2_masks_seg_cvppp/test_AttUNet2_masks_seg_cvppp_300.dat 
+--load trained_models/cvppp/cvppp_train/5.dat 

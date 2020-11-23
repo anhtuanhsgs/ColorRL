@@ -1,6 +1,6 @@
 cat $0
-python main.py --env ins_wswm_0 \
---gpu-id  0 1 2 3  --workers 8 --valid-gpu 1 \
+python main.py --env cvppp_train \
+--gpu-id  0 1 2 3  --workers 8 --valid-gpu 0 \
 --lbl-agents 0 --num-steps 6 --max-episode-length 6 --reward seg \
 --model AttUNet2 --out-radius 16 --use-masks --size 224 224 \
 --features 32 64 128 256 512 --entropy-alpha 0.05 \
@@ -12,6 +12,4 @@ python main.py --env ins_wswm_0 \
 --log-dir logs/July2020/ --save-model-dir logs/July2020/trained_models/ \
 --dilate-fac 2 \
 --rew-drop 20 --rew-drop-2 1 \
---wctrl s2m \
---wctrl-schedule 2000 4000 6000 8000 10000 12000 14000 \
---exp-pool 50 \
+
