@@ -11,16 +11,16 @@ docker pull anhtuanhsgs/pytorch-openai:1.1
 
 ## Data Preparation
 For 3D datasets, we use Tag Image File Format (TIFF) format. For 2D images, we tested our code with both .png and .tif files.
-Input images and their label should be placed in two folders: A and B, respectively. For example:
+Input images and their labels should be placed in two folders: A and B, respectively. For example:
 ```
 path_to_train_set/A/*.tif (for input images)
 path_to_train_set/B/*.tif (for label images)
 ```
-Testing data path is settup as:
+Testing data path is setup as:
 ```
 path_to_test_set/A/*.tif
 ```
-### Example with CREMI
+## Example with CREMI
 We include our Cre-256 dataset in '''Data/Cremi/Corrected'''
 For parameters' usage, please see '''main.py'''
 
@@ -33,7 +33,7 @@ To deploy a trained agent: (need to modify the checkpoint path to a saved checkp
 bash run_scrips/256_cremi_deploy.sh
 ```
 
-### Step-by-step example with CVPPP
+## Step-by-step example with CVPPP
 Setting up for CVPPP data set can be done as follows:
 
 Download CVPPP data from <https://www.plant-phenotyping.org/CVPPP2017>
@@ -49,7 +49,7 @@ cd Data/CVPPP_Challenge/
 python ExtractData.py
 ```
 
-## Training
+### Training
 For training with CVPPP (similarly with other data), run:
 ```
 bash run_scrips/cvppp_train.sh
@@ -62,7 +62,7 @@ tensorboard --logdir=logs/
 
 checkpoints are saved at ```trained_models```
 
-## Inference
+### Inference
 For test set inference with CVPPP (similarly with other data), edit ```run_scrips/cvppp_deploy.sh```:
 ```--load```: load a check point (eg. ```trained_models/cvppp/cvppp/```)
 ```--deploy```: to run as an inference task
