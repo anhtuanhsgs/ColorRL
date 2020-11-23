@@ -13,7 +13,7 @@ python -W ignore main.py --env test \
 --max-temp-steps 99 \
 --split prox \
 --log-dir logs/Aug2020/ \
---save-model-dir trained_models \
+--save-model-dir trained_models/ \
 --dilate-fac 2 \
 --rew-drop 8 --rew-drop-2 8 \
 
