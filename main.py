@@ -715,15 +715,15 @@ def main (scripts, args):
          deploy (shared_model, args, args.gpu_ids [0], (raw_test, gt_lbl_test))
          exit ()
     
-    # if args.shared_optimizer:
-    #     if args.optimizer == 'RMSprop':
-    #         optimizer = SharedRMSprop(shared_model.parameters(), lr=args.lr)
-    #     if args.optimizer == 'Adam':
-    #         optimizer = SharedAdam(
-    #             shared_model.parameters(), lr=args.lr, amsgrad=args.amsgrad)
-    #     optimizer.share_memory()
-    # else:
-    #     optimizer = None
+    if args.shared_optimizer:
+        if args.optimizer == 'RMSprop':
+            optimizer = SharedRMSprop(shared_model.parameters(), lr=args.lr)
+        if args.optimizer == 'Adam':
+            optimizer = SharedAdam(
+                shared_model.parameters(), lr=args.lr, amsgrad=args.amsgrad)
+        optimizer.share_memory()
+    else:
+        optimizer = None
 
 
     processes = []
