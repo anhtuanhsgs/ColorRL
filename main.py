@@ -204,7 +204,7 @@ parser.add_argument (
     type=int,
     default= [32, 64, 128, 256],
     nargs='+', 
-    help='Feature size Attention UNET'
+    help='Feature size of the core network'
 )
 
 parser.add_argument (
@@ -339,7 +339,7 @@ parser.add_argument (
     '--valid-gpu',
     type=int,
     default=-1,
-    help='Choose gpu for validation',
+    help='Choose gpu-id for the verbose worker',
 )
 
 parser.add_argument (
