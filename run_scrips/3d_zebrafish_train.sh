@@ -14,4 +14,4 @@ python main.py --env 0803_6 \
 --minsize 12 \
 --dilate-fac 4 \
 --rew-drop 7 --rew-drop-2 9 \
---load logs/Aug2020/trained_models/zebrafish3D/0803_5_UNet3D/7000.dat \
+# --load logs/Aug2020/trained_models/zebrafish3D/0803_5_UNet3D/7000.dat \
