@@ -22,8 +22,8 @@ path_to_test_set/A/*.tif
 ```
 To update data path, please modify ```main.py```
 
-## Data Preparation
-For evaluation, visit jupyter notebooks in ```evaluation/```
+## Evaluation
+For evaluation details, visit jupyter notebooks in ```evaluation/```
 
 ## Example with CREMI
 We include our Cre-256 dataset in '''Data/Cremi/Corrected'''
