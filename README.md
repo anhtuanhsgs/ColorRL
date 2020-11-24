@@ -22,6 +22,9 @@ path_to_test_set/A/*.tif
 ```
 To update data path, please modify ```main.py```
 
+## Data Preparation
+For evaluation, visit jupyter notebooks in ```evaluation/```
+
 ## Example with CREMI
 We include our Cre-256 dataset in '''Data/Cremi/Corrected'''
 For parameters' usage, please see '''main.py'''
@@ -65,12 +68,26 @@ tensorboard --logdir=logs/
 checkpoints are saved at ```trained_models```
 
 ### Inference
-For test set inference with CVPPP (similarly with other data), edit ```run_scrips/cvppp_deploy.sh```:
+To make predictions on a dataset, For test set inference with CVPPP (similarly with other data), edit ```run_scrips/cvppp_deploy.sh```:
 
-```--load```: load a check point (eg. ```trained_models/cvppp/cvppp/```)
+```--load```: path to a check point (eg. ```trained_models/cvppp/cvppp/```). Path to a checkpoint will have the following format:
+```[save_model_dir]/[data]/[env]_[model]/xxxx.dat```
+
+for example: 
+with:
+```
+--env 256_cremi_train
+--model AttUNet2
+--data 256_cremi
+--save-model-dir trained_models/
+```
+then an example of loading a checkpoint would be:
+```--load trained_models/256_cremi/256_cremi_train_AttUNet2/15000.dat```
 
 ```--deploy```: to run as an inference task
-then runs:
+
+
+To make predictions, run:
 ```
 bash run_scrips/cvppp_deploy.sh
 ```
