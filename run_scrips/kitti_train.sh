@@ -1,7 +1,7 @@
 cat kitti_train.sh
 
 python main.py --data kitti --train-log-period 24 \
---env kitti_train_3_CNN6_03112019 \
+--env kitti \
 --gpu-id 0 1 2 3 --workers 8 --lbl-agents 0 \
 --downsample -1 --size 160 480 --minsize 12 \
 --num-steps 4 --max-episode-length 4 \

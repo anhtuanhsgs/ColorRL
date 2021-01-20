@@ -39,7 +39,7 @@ def inference (args, logger, model, tests, test_env, gpu_id, rng, iter, upsize_l
                 gt_ret = []
                 idxs.append (rng.choice (range (tests), min (len (tests), 5), replace=False))
             else:
-                idxs.append (rng.choice (range (tests), min (len (tests), 33), replace=False))
+                idxs.extend (rng.choice (range (len (tests)), min (len (tests), 33), replace=False))
 
         for _ in range (min (len (tests), 33)):
             idxs.append ((idxs [-1] + 1) % len (tests))
