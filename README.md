@@ -1,5 +1,14 @@
 # ColorRL
 
+> [Tuan Anh Tran](https://scholar.google.com/citations?user=5-0hLggAAAAJ&hl=en),
+> Nguyen Tuan Khoa,
+> Tran Minh Quan,
+> [Won-Ki Jeong](http://hvcl.korea.ac.kr/?page_id=359) <br />
+> ColorRL: Reinforced Coloring for End-to-End Instance Segmentation <br />
+> In Computer Vision and Pattern Recognition Conference (CVPR), 2021
+
+[Paper](https://openaccess.thecvf.com/content/CVPR2021/papers/Tuan_ColorRL_Reinforced_Coloring_for_End-to-End_Instance_Segmentation_CVPR_2021_paper.pdf)
+
 ## Installation
 We tested our code with ```CUDA 10.0```, ```pytorch 1.1.0```, ```gym 0.14.0```
 for more information about the dependencies, please view ```dependencies.txt```
