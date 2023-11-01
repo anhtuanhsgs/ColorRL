@@ -1,8 +1,8 @@
 # ColorRL
 
 > [Tuan Anh Tran](https://scholar.google.com/citations?user=5-0hLggAAAAJ&hl=en),
-> Nguyen Tuan Khoa,
-> Tran Minh Quan,
+> [Nguyen Tuan Khoa](https://scholar.google.com.au/citations?user=7XpRM4cAAAAJ&hl=en),
+> [Tran Minh Quan](https://scholar.google.co.kr/citations?user=1kx2NrUAAAAJ&hl=ko),
 > [Won-Ki Jeong](http://hvcl.korea.ac.kr/?page_id=359) <br />
 > ColorRL: Reinforced Coloring for End-to-End Instance Segmentation <br />
 > In Computer Vision and Pattern Recognition Conference (CVPR), 2021
