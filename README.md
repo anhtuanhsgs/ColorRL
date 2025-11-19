@@ -1,4 +1,4 @@
-# ColorRL
+# ColorRL: Reinforced Coloring for End-to-End Instance Segmentation
 
 > [Tuan Anh Tran](https://scholar.google.com/citations?user=5-0hLggAAAAJ&hl=en),
 > [Nguyen Tuan Khoa](https://scholar.google.com.au/citations?user=7XpRM4cAAAAJ&hl=en),
