@@ -5,7 +5,7 @@ astor==0.8.0
 backcall==0.1.0
 beautifulsoup4==4.7.1
 boost-py==0.0.2
-certifi==2019.3.9
+certifi==2022.12.7
 cffi==1.12.3
 chardet==3.0.4
 cloudpickle==1.2.1
